@@ -15,20 +15,21 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
 	metadataBase: new URL("https://ccxlv.dev"),
 	title: {
-		default: "CCXLV | Technical Broadcast Engineer & Developer",
+		default: "CCXLV | Software Engineer & Designer",
 		template: "%s | ccxlv",
 	},
 	description:
-		"Technical Broadcast Engineer and Developer specializing in automated live stream infrastructure, real-time data integration, and high-performance web tools.",
+		"Software Engineer and Designer focused on logic, performance, and building clean solutions for complex systems—from document-to-audio platforms to real-time broadcast tools.",
 	keywords: [
-		"Broadcast Engineering",
-		"Technical Production",
+		"Software Engineer",
+		"Product Design",
+		"Systems Architecture",
 		"Next.js Developer",
-		"Red Bull MEO Georgia",
-		"PUBG Mobile Automation",
-		"Lottie Live Data",
 		"TypeScript",
-		"Flask",
+		"Linux",
+		"LernaFlow",
+		"Red Bull MEO Georgia",
+		"Georgia Tech Scene",
 	],
 	authors: [{ name: "CCXLV" }],
 	creator: "CCXLV",
@@ -37,23 +38,26 @@ export const metadata: Metadata = {
 		locale: "en_US",
 		url: "https://ccxlv.dev",
 		siteName: "ccxlv.dev",
-		title: "CCXLV | Technical Broadcast Engineer & Developer",
+		title: "CCXLV | Software Engineer & Designer",
 		description:
-			"Building automated broadcast systems and high-level technical infrastructure for major esports events.",
+			"Engineering high-performance software and clean systems with a logic-first approach.",
 		images: [
 			{
 				url: "/og-image.png",
 				width: 1200,
 				height: 630,
-				alt: "CCXLV Portfolio",
+				alt: "ccxlv.dev | Software Engineer & Designer",
 			},
 		],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "CCXLV | Technical Broadcast Engineer & Developer",
-		description:
-			"Automated broadcast systems and real-time data infrastructure.",
+		title: "CCXLV | Software Engineer & Designer",
+		description: "Engineering high-performance software and clean systems.",
+		images: ["/og-image.png"],
+	},
+	icons: {
+		icon: "/favicon.ico",
 	},
 };
 
