@@ -10,8 +10,8 @@ export const Hero = () => {
 				<p className="text-xl text-muted-foreground leading-relaxed mb-8">
 					I build specialized software and write about the engineering behind
 					them. Currently, I am a Computer Science student at SANGU and the
-					founder of <Link href="https://lernaflow.com" text="LernaFlow" />, an
-					AI-driven platform.
+					founder of <Link href="https://lernaflow.com" text="LernaFlow" />, a
+					Document-to-Audio Platform.
 				</p>
 				<p className="text-lg text-muted-foreground leading-relaxed">
 					Beyond my own projects, I've engineered real-time broadcast tools for
