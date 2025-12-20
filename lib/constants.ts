@@ -12,12 +12,18 @@ export const EXP_DEV_TOOLS = [
 	"React",
 	"Next.js",
 	"Electron",
+	"WebSockets",
 	"TailwindCSS",
 	"ShadcnUI",
 	"PostgreSQL",
 	"MySQL",
 	"SQLite",
 	"Redis",
+	"Linux",
+	"Docker",
+	"Git",
+	"AWS",
+	"DigitalOcean",
 ];
 
 export const EXP_DESIGN_TOOLS = [
