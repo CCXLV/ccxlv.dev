@@ -1,0 +1,74 @@
+---
+title: "Engineering the Live Stream: A Multi-Service Stack for Red Bull M.E.O."
+excerpt: "How I worked on the technical infrastructure for the Red Bull M.E.O. 2025 Georgia finals, building a bridge between live game data and broadcast visuals."
+date: "2025-11-18"
+tags: ["Express", "Electron", "React", "TypeScript", "Python", "Photoshop", "After Effects", "Lottie"]
+---
+
+# Overview
+
+Between September 30th and the LAN finals on November 16th, 
+I developed the technical broadcast infrastructure and visual identity for Red Bull M.E.O. 2025 Georgia. 
+My goal was to introduce a professional-tier tournament experience to the Georgian PUBG Mobile community, 
+implementing technical standards and automation that had not been seen in previous local events.
+
+## The Visual Identity
+
+The first part of the project was about the graphics. 
+I used **Photoshop** to take the official Red Bull assets and turn them into a full look for the tournament.
+
+The most important part was that I was in direct contact with the tournament organizers from **Red Bull**. 
+They gave me the raw assets and gave me feedback on everything I made. 
+We went back and forth until they were happy with the results and approved them.
+
+My goal was simple: make sure the Georgian community got a tournament that looked just as professional 
+as the official ones done by PUBG Mobile itself. 
+By working closely with the associates, I was able to make sure all the social media posts 
+and stream graphics stayed "on brand" while still looking high quality.
+
+To achieve this, I established a visual framework that involved two distinct workflows:
+
+- **Static Design:** Using **Photoshop** to create social media branding and community assets for the Georgian PUBG Mobile scene.
+- **Motion Graphics:** Developing a suite of broadcast compositions in **After Effects**. To ensure these weren't just static videos, 
+I exported them via **[Lottie](https://github.com/airbnb/lottie-web)**, allowing the animations to be 
+controlled and populated by live data in real-time.
+
+## System Architecture
+
+Before this project, I worked on the Play Card Tournament, where I first built the tools for broadcast automation. 
+For Red Bull M.E.O., I refactored that code to make it more stable and easier to use in a live environment.
+
+The system was built as a multi-service stack to handle three different jobs:
+
+- **Management Suite (Electron, TypeScript)**: I built a desktop application to manage the Lottie assets. 
+It allowed me to upload the JSON files and images, then edit text and swap assets on the fly. 
+This gave me a "control center" to manage the visuals without touching the code during the event.
+- **The Content Server (Express, React)**: I developed a full-stack web application to host the Lottie files and provide an API. 
+This acted as the central hub where the graphics were updated and served to the broadcast.
+- **The Data Bridge (Flask)**: To get live stats from the game, I made a webserver using **Flask** 
+and bundled it into an executable with **PyInstaller**. 
+This server received raw data from the PUBG Mobile observer and sent it to the web app, 
+which automatically updated the Lottie animations and live-data tables.
+
+## The LAN Finals
+
+On the day of the finals, the project moved from development to live execution. 
+My role was to make sure the technical side of the broadcast and the venue visuals ran perfectly.
+
+Because I had built the automation tools beforehand, I was able to focus on the live production:
+
+- **Real-time Graphics:** The system worked exactly as planned. When the **PUBG Mobile observer** sent match data, 
+my Flask bridge caught it, and the Lottie animations updated on the stream instantly. 
+This meant we had live leaderboards and player stats without any manual typing.
+- **Broadcast Architecture**: I managed the full production feed, 
+using **OBS** to bridge the gameplay, the automated data tables, and the tournament branding. 
+I handled the routing for both the online stream and the physical screens in the venue to ensure a consistent look across the whole event.
+
+## Conclusion
+
+Building this system from scratch over six weeks showed me how much "Logic-First" engineering can improve a live event. 
+By using **TypeScript**, **Python**, **Electron**, and **React**, 
+I took a high-pressure manual job and turned it into an automated, professional broadcast.
+
+The result was a tournament for the Georgian community that felt just as high-level as the international pro leagues. 
+You can see the final result of the production on the **[Red Bull Gaming YouTube channel](https://www.youtube.com/watch?v=3gdWjx7d13k)** (Note: The broadcast was region-locked to Georgia).
