@@ -1,0 +1,136 @@
+---
+title: "Integrating Stripe Subscriptions into an Existing Backend"
+excerpt: "How I integrated subscriptions, referral, and top-up features into an unfamiliar backend."
+date: "2025-11-23"
+tags: ["NestJS", "TypeScript", "TypeORM", "PostgreSQL", "Stripe", "Webhooks"]
+---
+
+# Overview
+
+In this post, I'll discuss how I implemented a subscriptions feature into an existing NestJS backend, despite
+having only used NestJS before for some simple APIs I built for fun.
+
+## Strange Codebase
+
+As I mentioned earlier, I had never worked on a large NestJS project, so this was my first opportunity to do so.
+When I got access to the codebase, I began figuring out how everything was set up and how the code was written.
+Since I care about clean code, it felt wrong to add new features using a different coding style.
+
+Once I got familiar with the codebase, I started working on the features I had to add. They were:
+- **Subscriptions:** The backend had many features already built-in for the website, but it had no subscriptions,
+so my task was to integrate **Stripe**.
+- **Top-ups:** Along with integrating **Stripe**, top-ups were another feature I had to work on.
+- **Referrals:** This was the third feature which also included adding a **rewards** feature in the backend.
+
+## Subscriptions
+
+**Stripe API** was also unfamiliar to me, but I had some prior experience 
+with **PayPal**, **Braintree**, **Paddle**, so it wasn't that strange after all.
+First, I worked on the structure I felt was the right way to integrate, afterward I used AI to get feedback about it.
+With its help, I refined the structure and proposed it to the client, who liked it and approved it, and I got started.
+
+The client wanted to integrate Stripe with Stripe's hosted pages to manage subscriptions, which made my work much easier to implement.
+I only needed to integrate the subscriptions and provide API endpoints that would let the frontend manage users' subscriptions.
+
+> **Note:** The database tables and schemas shown in this post are simplified versions for demonstration purposes. 
+> The actual implementation includes different/additional columns, relationships, and internal fields that are not disclosed here.
+
+First, I implemented a `Subscription` table in the database which had several columns for syncing them with Stripe's plans
+and customers, plus some additional columns to make the frontend's work easier.
+
+Then there was a `SubscriptionPlan` table which was for managing internal subscription plans, which was synced 
+to the Stripe's Products and Prices using **Stripe Webhooks**. This made everything easier by providing a single source of truth 
+and allowed non-technical team members to manage subscription plans directly in Stripe, with all changes automatically 
+syncing back to our internal database. 
+
+## Top-ups
+
+The second feature was to implement top-ups with Stripe. Users should be able to pay a certain amount of money 
+and receive internal credits in exchange.
+I implemented a simple balance system that tracked users and their balances, allowing them to top up their accounts 
+through Stripe payments which would then be converted to credits in the system.
+
+## Referrals
+
+The third and last feature was referrals. This seemed like it would be more work, but it actually took me less time than the 
+initial subscriptions implementation.
+
+The goal was to implement a referral system where paid users could create referral links
+that new users could use when registering. When these new users made their first subscription, both the referrer and the new user 
+would receive rewards.
+
+The initial requirements were structured like this:
+
+<table>
+  <thead>
+    <tr>
+      <th>Subscription Number</th>
+      <th>Inviter Reward</th>
+      <th>Invitee Reward</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>First</td>
+      <td>$6</td>
+      <td>$7</td>
+    </tr>
+    <tr>
+      <td>Second</td>
+      <td>$12</td>
+      <td>$15</td>
+    </tr>
+    <tr>
+      <td>Third</td>
+      <td>$18</td>
+      <td>$25</td>
+    </tr>
+  </tbody>
+</table>
+
+Instead of hard coding those rewards, I created a system where a single table could be the 
+source of the rewards and the payment stages they were in.
+I implemented a `ReferralReward` table that tracked the payment milestone, reward status, and reward amounts:
+
+<table>
+  <thead>
+    <tr>
+      <th>milestone</th>
+      <th>inviter_amount</th>
+      <th>invitee_amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>6.00</td>
+      <td>7.00</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>12.00</td>
+      <td>15.00</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>18.00</td>
+      <td>25.00</td>
+    </tr>
+  </tbody>
+</table>
+
+This approach made it easy to adjust reward amounts without code changes. When a new user registers with a referral link, the system tracks their relationship to the referrer. 
+As the new user completes their subscriptions, the system automatically checks which milestone they've reached and distributes the appropriate rewards to both parties.
+
+The rewards are integrated with the top-up system I mentioned earlier, so both the referrer and invitee receive credits directly into their accounts. 
+The milestone tracking ensures that rewards are only given based on the milestones defined in the database, making the referral program sustainable while still being attractive to users.
+
+Since this was built on top of the subscription webhook infrastructure I had already set up, implementing the referral rewards was straightforward. 
+The webhooks would trigger the reward distribution logic whenever a subscription payment was successfully processed, keeping everything automated and reliable.
+
+## Conclusion
+
+Working on this project was a great learning experience. Coming into an unfamiliar NestJS codebase and having to implement three major features: subscriptions, top-ups, and referrals, taught me a lot about adapting to existing codebases and maintaining consistency with established patterns.
+
+The integration of Stripe with webhooks made the system robust and automated, while the flexible database-driven approach for referral rewards ensured the system could evolve without code changes. 
+By leveraging Stripe's hosted pages and webhook infrastructure, I was able to focus on the business logic rather than payment processing details, which significantly sped up development.

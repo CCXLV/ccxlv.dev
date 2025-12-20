@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 		template: "%s | ccxlv",
 	},
 	description:
-		"Software Engineer and Builder focused on logic, performance, and building clean solutions for complex systems—from document-to-audio platforms to real-time broadcast tools.",
+		"Software Engineer and Builder focused on logic, performance, and building clean solutions for complex systems-from document-to-audio platforms to real-time broadcast tools.",
 	keywords: [
 		"Software Engineer",
 		"Product Design",
