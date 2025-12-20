@@ -65,7 +65,7 @@ export const Header = () => {
 						))}
 					</div>
 					{/* Mobile Navigation */}
-					<SidebarTrigger className="cursor-pointer" />
+					<SidebarTrigger className="md:hidden cursor-pointer" />
 				</div>
 			</nav>
 		</header>

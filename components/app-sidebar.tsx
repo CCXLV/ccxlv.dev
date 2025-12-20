@@ -23,7 +23,7 @@ export function AppSidebar() {
 	};
 
 	return (
-		<Sidebar>
+		<Sidebar className="md:hidden">
 			<SidebarContent>
 				<SidebarGroup>
 					<SidebarGroupContent>
