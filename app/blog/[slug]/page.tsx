@@ -43,11 +43,11 @@ export default async function BlogPostPage({
 						<h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mt-3 mb-4 text-balance">
 							{post.title}
 						</h1>
-						<div className="flex items-center gap-4">
+						<div className="flex gap-4 flex-col md:flex-row md:items-center">
 							<span className="text-sm text-muted-foreground">
 								{post.readTime}
 							</span>
-							<div className="flex gap-2">
+							<div className="flex flex-wrap gap-2">
 								{post.tags.map((tag) => (
 									<Badge key={tag} variant="secondary">
 										{tag}
