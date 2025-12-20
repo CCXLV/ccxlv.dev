@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NGINX_FILE_PATH=/etc/nginx/conf.d/default.conf
+NGINX_FILE_PATH=/etc/nginx/ccxlv.dev/default.conf
 
 OLD_FRONTEND=${1}
 NEW_FRONTEND=${2}

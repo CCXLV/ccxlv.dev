@@ -3,7 +3,7 @@
 DOCKER_NETWORK=app-network
 DOCKER_CONTAINER_NAME=frontend
 DOCKER_IMAGE=ghcr.io/ccxlv/ccxlv.dev-frontend
-NGINX_FILE_PATH=/etc/nginx/conf.d/default.conf
+NGINX_FILE_PATH=/etc/nginx/ccxlv.dev/default.conf
 
 COMMIT_HASH=${1}
 GITHUB_ACTOR=${2}
