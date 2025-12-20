@@ -24,6 +24,8 @@ services:
       - "443:443"
     volumes:
       - /etc/nginx/ccxlv.dev/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - /etc/ssl/certs/ccxlv.dev.pem:/etc/ssl/certs/ccxlv.dev.pem:ro
+      - /etc/ssl/certs/ccxlv.dev.key:/etc/ssl/certs/ccxlv.dev.key:ro
     networks:
       - app-network
 
