@@ -12,10 +12,7 @@ mv $NGINX_FILE_PATH.tmp $NGINX_FILE_PATH
 max_retries=5
 count=0
 
-# Find the current port used by Nginx proxy
-CURRENT_NGINX=$(grep 'server nginx-' $NGINX_PROXY_FILE_PATH | awk -F':' '{print $1}' | awk '{print $2}')
-
-until docker exec "$CURRENT_NGINX" nginx -s reload; do
+until docker exec nginx nginx -s reload; do
   count=$((count+1))
   if [ $count -ge $max_retries ]; then
     echo "⚠️ Could not reload Nginx after $max_retries attempts."
