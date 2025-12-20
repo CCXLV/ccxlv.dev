@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { navLinks } from "@/lib/constants";
 
 export const Header = () => {
 	const pathname = usePathname();
@@ -41,44 +43,29 @@ export const Header = () => {
 
 	return (
 		<header className="border-b border-border/40 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-			<nav className="container mx-auto px-6 py-6">
+			<nav className="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
 				<div className="flex items-center justify-between">
 					<Link
 						href="/"
-						className="text-xl font-semibold tracking-tight text-foreground hover:text-accent transition-colors"
+						className="text-lg sm:text-xl font-semibold tracking-tight text-foreground hover:text-accent transition-colors"
 					>
 						Giorgi Merebashvili
 					</Link>
-					<div className="flex gap-8">
-						<Link
-							href="/#about"
-							onClick={(e) => handleHashClick(e, "/#about")}
-							className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-						>
-							About
-						</Link>
-						<Link
-							href="/#work-experience"
-							onClick={(e) => handleHashClick(e, "/#work-experience")}
-							className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-						>
-							Work Experience
-						</Link>
-						<Link
-							href="/#skills"
-							onClick={(e) => handleHashClick(e, "/#skills")}
-							className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-						>
-							Skills
-						</Link>
-						<Link
-							href="/#blog"
-							onClick={(e) => handleHashClick(e, "/#blog")}
-							className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-						>
-							Blog
-						</Link>
+					{/* Desktop Navigation */}
+					<div className="hidden md:flex gap-8">
+						{navLinks.map((link) => (
+							<Link
+								key={link.href}
+								href={link.href}
+								onClick={(e) => handleHashClick(e, link.href)}
+								className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+							>
+								{link.label}
+							</Link>
+						))}
 					</div>
+					{/* Mobile Navigation */}
+					<SidebarTrigger className="cursor-pointer" />
 				</div>
 			</nav>
 		</header>

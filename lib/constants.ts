@@ -1,5 +1,12 @@
 import type { WorkExperience } from "./types";
 
+export const navLinks = [
+	{ href: "/#about", label: "About" },
+	{ href: "/#work-experience", label: "Work Experience" },
+	{ href: "/#skills", label: "Skills" },
+	{ href: "/#blog", label: "Blog" },
+];
+
 export const EXP_LANGUAGES = ["Python", "TypeScript (JS)", "C++", "Rust"];
 
 export const EXP_DEV_TOOLS = [

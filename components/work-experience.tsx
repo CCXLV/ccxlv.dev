@@ -1,7 +1,7 @@
 import { Calendar, MapPin } from "lucide-react";
 import Markdown from "react-markdown";
+import { Badge } from "@/components/ui/badge";
 import { WORK_EXPERIENCES } from "@/lib/constants";
-import { Badge } from "./ui/badge";
 
 export function WorkExperience() {
 	return (
