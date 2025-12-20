@@ -14,14 +14,16 @@ const geistMono = Geist_Mono({
 	subsets: ["latin"],
 });
 
+const description =
+	"Software Engineer and Builder focused on logic, performance, and building clean solutions for complex systems-from document-to-audio platforms to real-time broadcast tools.";
+
 export const metadata: Metadata = {
 	metadataBase: new URL("https://ccxlv.dev"),
 	title: {
 		default: "CCXLV | Software Engineer & Builder",
 		template: "%s | ccxlv",
 	},
-	description:
-		"Software Engineer and Builder focused on logic, performance, and building clean solutions for complex systems-from document-to-audio platforms to real-time broadcast tools.",
+	description,
 	keywords: [
 		"Software Engineer",
 		"Product Design",
@@ -41,8 +43,7 @@ export const metadata: Metadata = {
 		url: "https://ccxlv.dev",
 		siteName: "ccxlv.dev",
 		title: "CCXLV | Software Engineer & Builder",
-		description:
-			"Engineering high-performance software and clean systems with a logic-first approach.",
+		description,
 		images: [
 			{
 				url: "/og-image.png",
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
 	twitter: {
 		card: "summary_large_image",
 		title: "CCXLV | Software Engineer & Builder",
-		description: "Engineering high-performance software and clean systems.",
+		description,
 		images: ["/og-image.png"],
 	},
 	icons: {
