@@ -18,7 +18,11 @@ const description =
 	"Software Engineer and Builder focused on logic, performance, and building clean solutions for complex systems-from document-to-audio platforms to real-time broadcast tools.";
 
 export const metadata: Metadata = {
-	metadataBase: new URL("https://ccxlv.dev"),
+	metadataBase: new URL(
+		process.env.NODE_ENV === "development"
+			? "http://localhost:3000"
+			: "https://ccxlv.dev",
+	),
 	title: {
 		default: "CCXLV | Software Engineer & Builder",
 		template: "%s | ccxlv",

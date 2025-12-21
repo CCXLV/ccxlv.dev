@@ -17,7 +17,17 @@ export interface BlogPost {
 	content?: string;
 }
 
+export interface BlogFrontmatter {
+	title: string;
+	excerpt: string;
+	description?: string;
+	keywords?: string[];
+	ogImage?: string;
+	date: string;
+	tags: string[];
+}
+
 export interface BlogPostWithContent extends BlogPost {
 	content: string;
-	frontmatter: Record<string, unknown>;
+	frontmatter: BlogFrontmatter;
 }

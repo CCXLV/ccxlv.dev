@@ -1,8 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import type { Metadata } from "next";
 import readingTime from "reading-time";
-import type { BlogPostWithContent } from "./types";
+import type { BlogFrontmatter, BlogPostWithContent } from "./types";
 
 const blogDirectory = path.join(process.cwd(), "content/blog");
 
@@ -27,7 +28,7 @@ export function getBlogPost(slug: string): BlogPostWithContent | null {
 	const { data, content } = matter(fileContents);
 	const stats = readingTime(content);
 
-	const frontmatter = data as Record<string, unknown>;
+	const frontmatter = data as BlogFrontmatter;
 
 	return {
 		slug,
@@ -38,6 +39,42 @@ export function getBlogPost(slug: string): BlogPostWithContent | null {
 		readTime: `${Math.ceil(stats.minutes)} min read`,
 		content,
 		frontmatter,
+	};
+}
+
+export function generateBlogMetadata(post: BlogPostWithContent): Metadata {
+	const { frontmatter, title, excerpt, tags, date } = post;
+
+	const description = frontmatter.description || excerpt;
+	const keywords = frontmatter.keywords || tags;
+	const ogImage = frontmatter.ogImage || "/og-image.png";
+
+	return {
+		title,
+		description,
+		keywords: [...keywords, ...tags],
+		openGraph: {
+			title,
+			description,
+			type: "article",
+			publishedTime: date,
+			authors: ["CCXLV"],
+			tags,
+			images: [
+				{
+					url: ogImage,
+					width: 1200,
+					height: 630,
+					alt: title,
+				},
+			],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title,
+			description,
+			images: [ogImage],
+		},
 	};
 }
 

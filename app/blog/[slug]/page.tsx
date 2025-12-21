@@ -1,17 +1,33 @@
 import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Badge } from "@/components/ui/badge";
-import { getBlogPost, getBlogSlugs } from "@/lib/blog";
+import { generateBlogMetadata, getBlogPost, getBlogSlugs } from "@/lib/blog";
 
 export async function generateStaticParams() {
 	const slugs = getBlogSlugs();
 	return slugs.map((slug) => ({
 		slug,
 	}));
+}
+
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+	const { slug } = await params;
+	const post = getBlogPost(slug);
+
+	if (!post) {
+		return {};
+	}
+
+	return generateBlogMetadata(post);
 }
 
 export default async function BlogPostPage({
