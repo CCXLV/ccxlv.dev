@@ -8,7 +8,7 @@ if [ -z "$LATEST_TAG" ]; then
     echo "No tags found, creating one..."
     NEW_TAG="v0.1.0"
 else
-    NEW_TAG=v$(echo $LATEST_TAG | awk -F. '{printf "%d.%d.%d\n", $1, $2, $3 + 1}')
+    NEW_TAG=v$(echo $LATEST_TAG | sed 's/^v//' | awk -F. '{printf "%d.%d.%d\n", $1, $2, $3 + 1}')
 fi
 
 echo "Creating new tag: $NEW_TAG"
