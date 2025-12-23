@@ -76,15 +76,16 @@ The biggest headache during the whole development process was finding a payment 
 I'm based in Georgia, which made things complicated.
 
 I had already fully integrated **Paddle**, but they rejected my application. 
+**Paddle** has its own hosted pages for subscription management, which I had already integrated, 
+so losing that meant I'd have to build my own subscription management UI.
+Plan changes, canceling subscriptions, payment method updates - all of it had to be built from scratch.
 **Stripe** doesn't work in Georgia. I tried reaching out to **Braintree** but they never responded to my emails. 
 **Braintree** has its own hosted pages for subscription management, which would have been nice, but since they didn't respond, that was out.
 
 Eventually I had to go with **BOG**, and it was the worst experience I had during the entire development process. 
-Their API was pretty much pointless, and a lot of things weren't documented properly. 
+Their API was nowhere near as advanced as the other payment providers, and a lot of things weren't documented properly. 
 For monthly subscriptions, I had to handle everything manually, which was annoying.
 
-Since **BOG** doesn't have hosted pages, I had to build the entire subscription management UI myself. 
-Plan changes, canceling subscriptions, payment method updates - all of it had to be built from scratch.
 
 The integration was even worse. The API endpoints didn't work as described in their documentation. 
 When I reached out to support, they couldn't even answer simple questions like what status code 
