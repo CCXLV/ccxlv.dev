@@ -1,0 +1,125 @@
+---
+title: "Building and Launching My First Startup as a Solo Founder"
+excerpt: "How I built and launched a startup from scratch as a solo founder and engineer, handling everything from development to deployment with no prior startup experience."
+description: "A journey through building my first startup as a solo founder. From initial concept to deployment, covering the technical stack including FastAPI, Next.js, React, TypeScript, Python, PostgreSQL, Redis, and AI integrations with Gemini and OpenAI APIs using Langchain and Qdrant."
+keywords: ["Solo Founder", "Startup Journey", "Solo Engineering", "FastAPI", "Next.js", "React", "TypeScript", "Python", "PostgreSQL", "Redis", "SQLAlchemy", "AI Integration", "Gemini API", "OpenAI API", "Langchain", "Qdrant", "Cloudflare R2", "Docker", "SaaS Development", "Full Stack Development", "Payment Integration", "Deployment"]
+date: "2025-12-24"
+tags: [
+  "FastAPI", "Next.js", "React", 
+  "TypeScript", "Python", 
+  "PostgreSQL", "Redis", "SQLAlchemy", 
+  "Gemini API", "OpenAI API", "Langchain", "Qdrant",
+  "Cloudflare R2", "Docker"
+]
+ogImage: "/blogs/my-solo-startup-og.png"
+---
+
+# Overview
+
+I'm going to talk about how I built and launched my first startup as a solo founder. 
+I had no startup experience, so I had to figure everything out myself: choosing the tech stack, building it, and getting it deployed.
+
+I'll go through the technical decisions I made, what was hard, and how I got it from idea to something people could actually use.
+
+## The Birth of the Idea
+
+In early April 2025, I was reading [Rust documentation](https://doc.rust-lang.org/book/title-page.html) and started thinking: 
+what if there was something that could turn text documents into audiobooks? 
+And what if I built it? It would solve a problem I had, and I'd get real production experience which I'd never had before.
+
+So the idea was: build a website where you can upload PDF, DOCX, or TXT files, 
+and using AI, it would split them into chapters and turn them into audio.
+
+## Tech Stack
+
+I wanted to use tech I hadn't tried on a big project before, so I went with **Next.js** for the frontend 
+and **FastAPI** for the backend. I love Python and wanted to actually use it in production, 
+and **FastAPI** was getting a lot of hype at the time.
+
+I needed everything to be async, so **Flask** was out since it doesn't have async built in. 
+**Quart** exists but it's not as battle-tested as **FastAPI**. Same thing with **Django** - it has async but it's not as clean. 
+**FastAPI** has great dependency injection, good REST API stuff, and async/await works really well. 
+Also, I didn't want to build everything using just Next.js API routes.
+
+I started looking for open source examples to see how people actually build this stuff.
+I found [**Netflix/dispatch**](https://github.com/Netflix/dispatch) for FastAPI and [**vercel/ai-chatbot**](https://github.com/vercel/ai-chatbot) for Next.js.
+
+For the ORM I went with **SQLAlchemy** because it's mature and has good async support, which works well with FastAPI.
+
+For the database I chose **PostgreSQL**. It's PostgreSQL, what else do you need? It's solid and does everything.
+
+I also added **Redis** for logging and rate limiting. Fast and simple.
+
+For the AI stuff, I used **Gemini 2.0 Flash** for formatting documents into chapters. 
+The same model powers the chat feature where you can ask questions about your documents. 
+For generating audio, I first tried **Google's TTS** because it has a lot of voice models to choose from. 
+But for large audio files, cloud storage was the only option - the files had to be saved there, 
+and then streaming them back was tricky. So I switched to **OpenAI's TTS** - it doesn't need cloud storage 
+and was just the easiest path forward.
+
+For caching audio files, I used **Cloudflare R2**. When users want to replay chapters they've already listened to, 
+the audio is served from R2 instead of making another API request to OpenAI. This makes playback fast 
+and saves on API usage limits for users.
+
+I used **Langchain** because it has a lot of tools and integrations for this kind of work, 
+and **Qdrant** for storing the document vectors.
+
+## Development Timeline
+
+I started working on this in early April 2025. The plan was to build it fast, but life got in the way - 
+I had to take about 2 months off for university work and some other projects I was committed to. 
+So it ended up taking me around 5-6 months total, and I finally finished in September.
+
+## The Payment Provider Nightmare
+
+The biggest headache during the whole development process was finding a payment provider. 
+I'm based in Georgia, which made things complicated.
+
+I had already fully integrated **Paddle**, but they rejected my application. 
+**Stripe** doesn't work in Georgia. I tried reaching out to **Braintree** but they never responded to my emails. 
+**Braintree** has its own hosted pages for subscription management, which would have been nice, but since they didn't respond, that was out.
+
+Eventually I had to go with **BOG**, and it was the worst experience I had during the entire development process. 
+Their API was pretty much pointless, and a lot of things weren't documented properly. 
+For monthly subscriptions, I had to handle everything manually, which was annoying.
+
+Since **BOG** doesn't have hosted pages, I had to build the entire subscription management UI myself. 
+Plan changes, canceling subscriptions, payment method updates - all of it had to be built from scratch.
+
+The integration was even worse. The API endpoints didn't work as described in their documentation. 
+When I reached out to support, they couldn't even answer simple questions like what status code 
+an endpoint returns on failure. It took me 5-6 emails just to get a basic answer about error handling.
+
+This whole payment provider situation taught me that being a solo founder in certain countries 
+comes with extra challenges that you don't really think about until you hit them.
+
+## Deployment
+
+I deployed on a few different providers: **AWS**, **Google Cloud**, and **Vultr**. 
+It was awesome to finally see the website live at [lernaflow.com](https://lernaflow.com).
+
+There was one annoying issue during the initial launch. The frontend is built with Next.js using app routers, 
+and in the Docker container, the directory was also named `app`. This caused Next.js to fail indexing the routes. 
+It took me a whole day to figure out what was wrong. Classic case of something that should be simple 
+but ends up eating way more time than it should.
+
+## Lessons Learned
+
+Overall, the development went pretty well. The tech stack choices worked out, and building everything 
+was actually enjoyable. The Docker issue was frustrating but it's the kind of thing you learn from.
+
+The main thing I wanted from this project was professional-level experience, similar to what you'd get 
+working at a company. I think I achieved that - I built a full-stack application, handled deployment, 
+integrated payment systems, and shipped something real.
+
+## Conclusion
+
+Building this from scratch as a solo founder was a huge learning experience. 
+I got to use Python in production, learned FastAPI, and actually shipped something real.
+
+The payment provider situation was rough, but it's part of the journey. 
+If you're building a startup from a country with limited payment options, 
+be prepared for some extra hurdles.
+
+The site is live now at [lernaflow.com](https://lernaflow.com), and I got exactly what I wanted out of it - 
+real professional experience building and shipping a product from start to finish.
