@@ -8,7 +8,7 @@ export const Footer = () => {
 			<div className="container mx-auto px-6 py-12">
 				<div className="flex flex-col md:flex-row justify-between items-center gap-6">
 					<div className="flex flex-col items-center md:items-start gap-2">
-						<p className="text-sm text-muted-foreground">© 2025 CCXLV</p>
+						<p className="text-sm text-muted-foreground">© {new Date().getFullYear()} CCXLV</p>
 					</div>
 					<div className="flex gap-6">
 						<Link
