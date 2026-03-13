@@ -5,19 +5,19 @@ export const Hero = () => {
 		<section id="about" className="container mx-auto px-6 py-24 md:py-32">
 			<div className="max-w-3xl">
 				<h1 className="text-5xl md:text-6xl font-bold tracking-tight text-foreground mb-6 text-balance">
-					Software Engineer & Builder
+					Software Engineer
 				</h1>
 				<p className="text-xl text-muted-foreground leading-relaxed mb-8">
-					I build specialized software and write about the engineering behind
-					them. Currently, I am a Computer Science student at SANGU and the
-					founder of <Link href="https://lernaflow.com" text="LernaFlow" />, a
-					Document-to-Audio Platform.
+					I build software with a fixation on clean architecture and developer
+					experience. Currently building on a startup and contributing to
+					open-source from time to time.
 				</p>
 				<p className="text-lg text-muted-foreground leading-relaxed">
-					Beyond my own projects, I've engineered real-time broadcast tools for
-					Red Bull Gaming tournaments and developed custom open-source SDKs. I
-					value logic, performance, and turning complex systems into clean,
-					functional solutions.
+					Whether I’m working on systems-level infrastructure or architecting
+					full-stack applications, my goal is always the same: highly reusable,
+					DRY-compliant code that is as readable as it is efficient. I value the
+					craft of turning complex logic into elegant, well-structured solutions
+					that other developers actually enjoy using.
 				</p>
 			</div>
 		</section>
