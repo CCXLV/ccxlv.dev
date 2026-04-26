@@ -1,5 +1,3 @@
-import { Link } from "./link";
-
 export const Hero = () => {
 	return (
 		<section id="about" className="container mx-auto px-6 py-24 md:py-32">

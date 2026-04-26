@@ -22,7 +22,7 @@ export function WorkExperience() {
 							key={`${exp.company}-${exp.period}`}
 							className="group relative pl-6 border-l-2 border-border/40 hover:border-accent/50 transition-colors"
 						>
-							<div className="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-background border-2 border-border/40 group-hover:border-accent transition-colors" />
+							<div className="absolute -left-2.25 top-0 h-4 w-4 rounded-full bg-background border-2 border-border/40 group-hover:border-accent transition-colors" />
 							<div className="space-y-2">
 								<h3 className="text-lg font-semibold text-foreground group-hover:text-accent transition-colors">
 									{exp.title}

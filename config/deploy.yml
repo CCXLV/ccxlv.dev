@@ -1,0 +1,39 @@
+service: ccxlv-dev
+
+image: ccxlv/ccxlv.dev
+
+servers:
+  web:
+    - <%= ENV.fetch("HOST_IP") %>
+
+env:
+  secret:
+    - SSH_PRIVATE_KEY
+    - CERTIFICATE_PEM
+    - PRIVATE_KEY_PEM
+
+proxy:
+  host: ccxlv.dev
+  app_port: 3000
+  response_timeout: 60
+  healthcheck:
+    path: /
+  ssl:
+    certificate_pem: CERTIFICATE_PEM
+    private_key_pem: PRIVATE_KEY_PEM
+
+registry:
+  server: ghcr.io
+  username: ccxlv
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+builder:
+  arch: amd64
+  context: .
+  dockerfile: ./Dockerfile
+
+ssh:
+  user: kamal-deploy
+  key_data:
+    - SSH_PRIVATE_KEY
